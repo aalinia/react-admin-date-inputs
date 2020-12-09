@@ -1,8 +1,7 @@
-import React, {useCallback} from 'react';
+import React, {useCallback, useState} from 'react';
 import PropTypes from 'prop-types';
 import {useInput, useTranslate, FieldTitle} from 'ra-core';
 import {InputHelperText} from 'ra-ui-materialui';
-
 import {
     DatePicker,
     TimePicker,
@@ -13,6 +12,12 @@ import {
     MuiPickersUtilsProvider,
 } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
+import moment from "moment";
+import jMoment from "moment-jalaali";
+import JalaliUtils from "@date-io/jalaali";
+
+jMoment.loadPersian({ dialect: "persian-modern", usePersianDigits: true });
+const [selectedDate, handleDateChange] = useState(moment());
 
 const leftPad = (nb = 2) => value => ('0'.repeat(nb) + value).slice(-nb);
 const leftPad4 = leftPad(4);
@@ -223,6 +228,8 @@ const DateTimeInput = props => <Picker PickerComponent={DateTimePicker} {...prop
 const KeyboardDateInput = props => <Picker PickerComponent={KeyboardDatePicker} {...props} />;
 const KeyboardDateTimeInput = props => <Picker PickerComponent={KeyboardDateTimePicker} {...props} />;
 const KeyboardTimeInput = props => <Picker PickerComponent={KeyboardTimePicker} {...props} />;
+const JalaliDateInput = props => <Picker PickerComponent={DatePicker} utils={JalaliUtils} locale={'fa'} {...props} />;
+const JalaliDateTimeInput = props => <Picker PickerComponent={DateTimePicker} utils={JalaliUtils} locale={'fa'} {...props} />;
 
 DateInput.propTypes = {
     isRequired: PropTypes.bool,
@@ -338,11 +345,51 @@ KeyboardTimeInput.propTypes = {
     stringFormat: PropTypes.string
 };
 
+JalaliDateInput.propTypes = {
+    isRequired: PropTypes.bool,
+    label: PropTypes.string,
+    onChange: PropTypes.func,
+    meta: PropTypes.object,
+    options: PropTypes.object,
+    resource: PropTypes.string,
+    source: PropTypes.string,
+    labelTime: PropTypes.string,
+    margin: PropTypes.string,
+    variant: PropTypes.string,
+    className: PropTypes.string,
+    providerOptions: PropTypes.shape({
+        utils: PropTypes.func,
+        locale: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
+    }),
+    stringFormat: PropTypes.string
+};
+
+JalaliDateTimeInput.propTypes = {
+    isRequired: PropTypes.bool,
+    label: PropTypes.string,
+    onChange: PropTypes.func,
+    meta: PropTypes.object,
+    options: PropTypes.object,
+    resource: PropTypes.string,
+    source: PropTypes.string,
+    labelTime: PropTypes.string,
+    margin: PropTypes.string,
+    variant: PropTypes.string,
+    className: PropTypes.string,
+    providerOptions: PropTypes.shape({
+        utils: PropTypes.func,
+        locale: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
+    }),
+    stringFormat: PropTypes.string
+};
+
 export {
     DateInput,
     TimeInput,
     DateTimeInput,
     KeyboardDateInput,
     KeyboardDateTimeInput,
-    KeyboardTimeInput
+    KeyboardTimeInput,
+    JalaliDateInput,
+    JalaliDateTimeInput,
 };
