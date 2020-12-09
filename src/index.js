@@ -12,9 +12,9 @@ import {
     MuiPickersUtilsProvider,
 } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
+import JalaliUtils from "@date-io/jalaali";
 import moment from "moment";
 import jMoment from "moment-jalaali";
-import JalaliUtils from "@date-io/jalaali";
 
 jMoment.loadPersian({ dialect: "persian-modern", usePersianDigits: true });
 const [selectedDate, handleDateChange] = useState(moment());
