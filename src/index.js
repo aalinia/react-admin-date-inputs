@@ -152,7 +152,7 @@ const Picker = ({
     }, []);
 
     return (
-      <MuiPickersUtilsProvider utils={utils || DateFnsUtils} locale={locale}>
+      <MuiPickersUtilsProvider utils={utils || JalaliUtils} locale={locale}>
           <PickerComponent
             id={id}
             label={<FieldTitle
@@ -217,8 +217,8 @@ Picker.defaultProps = {
     labelTime: '',
     className: '',
     providerOptions: {
-        utils: DateFnsUtils,
-        locale: undefined,
+        utils: JalaliUtils,
+        locale: 'fa',
     },
 };
 
@@ -228,8 +228,8 @@ const DateTimeInput = props => <Picker PickerComponent={DateTimePicker} {...prop
 const KeyboardDateInput = props => <Picker PickerComponent={KeyboardDatePicker} {...props} />;
 const KeyboardDateTimeInput = props => <Picker PickerComponent={KeyboardDateTimePicker} {...props} />;
 const KeyboardTimeInput = props => <Picker PickerComponent={KeyboardTimePicker} {...props} />;
-const JalaliDateInput = props => <Picker PickerComponent={DatePicker} utils={JalaliUtils} locale={'fa'} {...props} />;
-const JalaliDateTimeInput = props => <Picker PickerComponent={DateTimePicker} utils={JalaliUtils} locale={'fa'} {...props} />;
+const JalaliDateInput = props => <Picker PickerComponent={DatePicker} {...props} />;
+const JalaliDateTimeInput = props => <Picker PickerComponent={DateTimePicker} {...props} />;
 
 DateInput.propTypes = {
     isRequired: PropTypes.bool,
